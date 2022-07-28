@@ -5,6 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -21,8 +24,12 @@ public class ScheduledTask {
         checkDirectories();
     }
 
-    public void checkDirectories()
-    {
+    public void checkDirectories() {
+        String myDirectoryPath = "/home/enrique/Downloads";
+        Path path = FileSystems.getDefault().getPath(myDirectoryPath);
 
+        if (Files.isDirectory(path)) {
+            log.info("Directory exists");
+        }
     }
 }
