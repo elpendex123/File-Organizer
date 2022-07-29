@@ -17,7 +17,7 @@ public class ScheduledTask {
     private static final Logger log = LoggerFactory.getLogger(ScheduledTask.class);
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
 
-    @Value("${downloads.directory}")
+    @Value("${DOWNLOADS_DIRECTORY}")
     private String downloadsDirectory;
 
     @Scheduled(fixedRate = 5000)
@@ -30,13 +30,17 @@ public class ScheduledTask {
     }
 
     public void checkDirectories() {
-//        String myDirectoryPath = "/home/enrique/Downloads";
         Path path = FileSystems.getDefault().getPath(downloadsDirectory);
 
         if (Files.isDirectory(path)) {
             log.info("Directory exists");
+            checkFiles();
         } else {
             log.info("Directory {} does not exist", downloadsDirectory);
         }
+    }
+
+    public void checkFiles() {
+        // TODO: check files in directory
     }
 }
