@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,12 +22,16 @@ public class ScheduledTask {
     @Value("${DOWNLOADS_DIRECTORY}")
     private String downloadsDirectory;
 
+    @Value("${MUSIC_DIRECTORY}")
+    private String musicDirectory;
+
     @Scheduled(fixedRate = 5000)
     public void reportCurrentTime() {
         log.info("The time is now {}", simpleDateFormat.format(new Date()));
 
         // Check Downloads directory for files
         log.info("Downloads directory: {}", downloadsDirectory);
+        log.info("Music directory: {}", musicDirectory);
         checkDirectories();
     }
 
@@ -41,6 +47,12 @@ public class ScheduledTask {
     }
 
     public void checkFiles() {
-        // TODO: check files in directory
+        File[] files = new File(downloadsDirectory).listFiles();
+
+        for (File file : files) {
+            log.info("file name: {}", file.getName());
+            if (file.getName().contains("mp3"))
+                log.info("This is a music file and needs to be moved to the music directory: {}", musicDirectory);
+        }
     }
 }
