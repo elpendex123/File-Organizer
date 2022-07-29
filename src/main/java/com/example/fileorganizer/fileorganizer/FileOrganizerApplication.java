@@ -7,9 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableScheduling
 public class FileOrganizerApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(FileOrganizerApplication.class, args);
     }
-
 }
