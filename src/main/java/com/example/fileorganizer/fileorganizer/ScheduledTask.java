@@ -19,6 +19,17 @@ public class ScheduledTask {
     private static final Logger log = LoggerFactory.getLogger(ScheduledTask.class);
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
 
+//    touch file.txt file.mp3 file.mp4 file.jpg file.png file.rtf file.wav file.mov
+
+    @Value("${PICTURES_DIRECTORY}")
+    private String picturesDirectory;
+
+    @Value("${VIDEOS_DIRECTORY}")
+    private String videosDirectory;
+
+    @Value("${DOCUMENTS_DIRECTORY}")
+    private String documentsDirectory;
+
     @Value("${DOWNLOADS_DIRECTORY}")
     private String downloadsDirectory;
 
@@ -49,10 +60,24 @@ public class ScheduledTask {
     public void checkFiles() {
         File[] files = new File(downloadsDirectory).listFiles();
 
+//        touch file.txt file.mp3 file.mp4 file.jpg file.png file.rtf file.wav file.mov
+
         for (File file : files) {
             log.info("file name: {}", file.getName());
-            if (file.getName().contains("mp3"))
-                log.info("This is a music file and needs to be moved to the music directory: {}", musicDirectory);
+
+            if (file.getName().endsWith(".mp3") || file.getName().endsWith(".wav")){
+                log.info("music file, moved to the music directory: {}", musicDirectory);
+                
+
+            if (file.getName().endsWith(".jpg") || file.getName().endsWith(".png"))
+                log.info("image file, moved to the music directory: {}", picturesDirectory);
+
+            if (file.getName().endsWith(".rtf") || file.getName().endsWith(".txt"))
+                log.info("text file, moved to the music directory: {}", documentsDirectory);
+
+            if (file.getName().endsWith(".mov") || file.getName().endsWith(".mp4"))
+                log.info("videos file, moved to the music directory: {}", videosDirectory);
+
         }
     }
 }
