@@ -47,16 +47,52 @@ public class ScheduledTask {
     }
 
     public void checkDirectories() {
-        Path path = FileSystems.getDefault().getPath(downloadsDirectory);
-
-        if (Files.isDirectory(path)) {
+        Path downloadsPath = FileSystems.getDefault().getPath(downloadsDirectory);
+        if (Files.isDirectory(downloadsPath)) {
             log.info("The {} directory exists", downloadsDirectory);
-            checkFiles();
         } else {
-            log.info("The {} directory does not exist", downloadsDirectory);
+            log.info("The {} directory does not exist, creating it", downloadsDirectory);
             File newDirectory = new File(downloadsDirectory);
             newDirectory.mkdir();
         }
+
+        Path documentsPath = FileSystems.getDefault().getPath(documentsDirectory);
+        if (Files.isDirectory(documentsPath)) {
+            log.info("The {} directory exists", documentsDirectory);
+        } else {
+            log.info("The {} directory does not exist, creating it", documentsDirectory);
+            File newDirectory = new File(documentsDirectory);
+            newDirectory.mkdir();
+        }
+
+        Path picturesPath = FileSystems.getDefault().getPath(picturesDirectory);
+        if (Files.isDirectory(picturesPath)) {
+            log.info("The {} directory exists", picturesDirectory);
+        } else {
+            log.info("The {} directory does not exist, creating it", picturesDirectory);
+            File newDirectory = new File(picturesDirectory);
+            newDirectory.mkdir();
+        }
+
+        Path videosPath = FileSystems.getDefault().getPath(videosDirectory);
+        if (Files.isDirectory(videosPath)) {
+            log.info("The {} directory exists", videosDirectory);
+        } else {
+            log.info("The {} directory does not exist, creating it", videosDirectory);
+            File newDirectory = new File(videosDirectory);
+            newDirectory.mkdir();
+        }
+
+        Path musicPath = FileSystems.getDefault().getPath(musicDirectory);
+        if (Files.isDirectory(musicPath)) {
+            log.info("The {} directory exists", musicDirectory);
+        } else {
+            log.info("The {} directory does not exist, creating it", musicDirectory);
+            File newDirectory = new File(musicDirectory);
+            newDirectory.mkdir();
+        }
+
+        checkFiles();
     }
 
     public void checkFiles() {
