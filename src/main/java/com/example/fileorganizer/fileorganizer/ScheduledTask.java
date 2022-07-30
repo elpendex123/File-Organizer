@@ -60,24 +60,28 @@ public class ScheduledTask {
     public void checkFiles() {
         File[] files = new File(downloadsDirectory).listFiles();
 
-//        touch file.txt file.mp3 file.mp4 file.jpg file.png file.rtf file.wav file.mov
-
         for (File file : files) {
             log.info("file name: {}", file.getName());
 
-            if (file.getName().endsWith(".mp3") || file.getName().endsWith(".wav")){
+            if (file.getName().endsWith(".mp3") || file.getName().endsWith(".wav")) {
                 log.info("music file, moved to the music directory: {}", musicDirectory);
-                
+                file.renameTo(new File(musicDirectory + File.separator + file.getName()));
+            }
 
-            if (file.getName().endsWith(".jpg") || file.getName().endsWith(".png"))
+            if (file.getName().endsWith(".jpg") || file.getName().endsWith(".png")) {
                 log.info("image file, moved to the music directory: {}", picturesDirectory);
+                file.renameTo(new File(picturesDirectory + File.separator + file.getName()));
+            }
 
-            if (file.getName().endsWith(".rtf") || file.getName().endsWith(".txt"))
+            if (file.getName().endsWith(".rtf") || file.getName().endsWith(".txt")) {
                 log.info("text file, moved to the music directory: {}", documentsDirectory);
+                file.renameTo(new File(documentsDirectory + File.separator + file.getName()));
+            }
 
-            if (file.getName().endsWith(".mov") || file.getName().endsWith(".mp4"))
+            if (file.getName().endsWith(".mov") || file.getName().endsWith(".mp4")) {
                 log.info("videos file, moved to the music directory: {}", videosDirectory);
-
+                file.renameTo(new File(videosDirectory + File.separator + file.getName()));
+            }
         }
     }
 }
